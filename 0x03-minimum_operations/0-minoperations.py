@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+
+
+""" Minimum Operations """
 def minOperations(n):
     copy = 1
     count = 0
