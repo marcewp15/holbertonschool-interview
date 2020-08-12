@@ -1,23 +1,17 @@
 #!/usr/bin/python3
 """ Minimum Operations """
 
-
 def minOperations(n):
-    copy = 1
     count = 0
-    minimo = []
+    add = 1
+    tmp = 0
 
-    if n < 2:
-        return 0
-
-    for paste in range(1, n):
-        for number in range(n):
-            copy += copy * paste
-            count += paste + 1
-
-            if n <= copy:
-                minimo.append(count)
-                break
-        count = 0
-        copy = 1
-    return(min(minimo))
+    while add < n:
+        if n % add == 0:
+            tmp = add
+            add *= 2
+            count += 1
+        else:
+            add += tmp
+        count += 1
+    return count
