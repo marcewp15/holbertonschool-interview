@@ -1,42 +1,44 @@
 #!/usr/bin/python3
 """ reads stdin line by line and computes metrics """
 
-
 if __name__ == '__main__':
+
     import sys
     import collections
 
-    size, count = 0, 1
-
-    my_dict = {"500": 0, "301": 0, "400": 0, "401": 0,
-               "403": 0, "404": 0, "405": 0, "200": 0}
-
-    def print_stadistics(size, my_dict):
-        """print metrics"""
-        print("File size: {}".format(size))
-        od = collections.OrderedDict(sorted(my_dict.items()))
-        for status, variable in od.items():
-            if variable != 0:
-                print("{}: {}".format(status, variable))
+    cont = 0
+    size = 0
+    status = {'200': 0, '301': 0, '400': 0, '401': 0,
+              '403': 0, '404': 0, '405': 0, '500': 0}
 
     try:
-        """Validation computes metrics and print stadistics"""
         for line in sys.stdin:
-            word = line.split()
-            try:
-                size += int(word[-1])
-                for status in my_dict.keys():
-                    if (word[-2] == status):
-                        my_dict[status] += 1
-                if count == 10:
-                    print_stadistics(size, my_dict)
-                    count = 0
-            except:
-                pass
-            count += 1
+            cont += 1
+            fs = line.split()
+            size += int(fs[-1])
+
+            for keys in status.keys():
+                if keys == fs[-2]:
+                    status[keys] += 1
+
+            if cont == 10:
+                print('File size: {}'.format(size))
+                od = collections.OrderedDict(sorted(status.items()))
+                for keys, values in od.items():
+                    if values != 0:
+                        print('{}: {}'.format(keys, values))
+                cont = 0
+
     except KeyboardInterrupt:
-        """Keyboard interrupt"""
-        print_stadistics(size, my_dict)
+        print('File size: {}'.format(size))
+        od = collections.OrderedDict(sorted(status.items()))
+        for keys, values in od.items():
+            if values != 0:
+                print('{}: {}'.format(keys, values))
         raise
 
-    print_stadistics(size, my_dict)
+    print('File size: {}'.format(size))
+    od = collections.OrderedDict(sorted(status.items()))
+    for keys, values in od.items():
+        if values != 0:
+	        print('{}: {}'.format(keys, values))
