@@ -35,4 +35,4 @@ if __name__ == '__main__':
         for keys, values in od.items():
             if values != 0:
                 print('{}: {}'.format(keys, values))
-        sys.exit()
+        exit(0)
