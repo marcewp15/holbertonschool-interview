@@ -17,7 +17,7 @@ if __name__ == '__main__':
             fs = line.split()
             size += int(fs[-1])
 
-            for keys in status:
+            for keys in status.keys():
                 if keys == fs[-2]:
                     status[keys] += 1
 
