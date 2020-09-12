@@ -34,5 +34,5 @@ if __name__ == '__main__':
         od = collections.OrderedDict(sorted(status.items()))
         for keys, values in od.items():
             if values != 0:
-                print('{} : {}'.format(keys, values))
+                print('{}: {}'.format(keys, values))
         sys.exit()
