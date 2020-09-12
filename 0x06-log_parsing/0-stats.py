@@ -1,0 +1,35 @@
+#!/usr/bin/python3
+
+import sys
+import collections
+
+cont = 0
+size = 0
+status = {'200': 0, '301': 0, '400': 0, '401': 0,
+          '403': 0, '404': 0, '405': 0, '500': 0}
+
+try:
+    for line in sys.stdin:
+        cont += 1
+        fs = line.split()
+        size += int(fs[-1])
+
+        for keys in status:
+            if keys == fs[-2]:
+                status[keys] += 1
+
+        if cont == 10:
+            print('File size: {}'.format(size))
+            od = collections.OrderedDict(sorted(status.items()))
+            for keys, values in od.items():
+                if values != 0:
+                    print('{} : {}'.format(keys, values))
+            cont = 0
+
+except KeyboardInterrupt:
+    print('File size: {}'.format(size))
+    od = collections.OrderedDict(sorted(status.items()))
+    for keys, values in od.items():
+        if values != 0:
+            print('{} : {}'.format(keys, values))
+    sys.exit()
