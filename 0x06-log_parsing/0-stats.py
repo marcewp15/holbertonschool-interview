@@ -15,11 +15,15 @@ if __name__ == '__main__':
         for line in sys.stdin:
             cont += 1
             fs = line.split()
-            size += int(fs[-1])
 
-            for keys in status.keys():
-                if keys == fs[-2]:
-                    status[keys] += 1
+            try:
+                size += int(fs[-1])
+
+                for keys in status.keys():
+                    if keys == fs[-2]:
+                        status[keys] += 1
+            except:
+                pass
 
             if cont == 10:
                 print('File size: {}'.format(size))
@@ -41,4 +45,4 @@ if __name__ == '__main__':
     od = collections.OrderedDict(sorted(status.items()))
     for keys, values in od.items():
         if values != 0:
-	        print('{}: {}'.format(keys, values))
+                print('{}: {}'.format(keys, values))
