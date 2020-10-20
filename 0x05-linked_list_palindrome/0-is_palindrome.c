@@ -1,48 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "lists.h"
-
 /**
- * is_palindrome - checks if a singly linked list is a palindrome
- * @head: head of the singly linked list
+ * cpalidrome - checks if it's a palindrome
+ * @left: double pointer to left node
+ * @right: double pointer to right node
  *
- * Return: 0 if it is not a palindrome, 1 if it is a palindrome
- **/
+ * Return: 0 if it's not a palindrome, pal otherwise
+ */
+int cpalindrome(listint_t **left, listint_t *right)
+{
+	int pal;
+
+	if (right == NULL)
+		return (1);
+
+	pal = cpalindrome(left, right->next);
+
+	if (pal == 0)
+		return (0);
+
+	pal = (right->n == (*left)->n);
+	*left = (*left)->next;
+
+	return (pal);
+}
+/**
+ * is_palindrome - Checks if a singly linked list is a palindrome
+ * @head: double pinter to head node
+ *
+ * Return: A palindrome
+ */
 int is_palindrome(listint_t **head)
 {
-	listint_t  *tmp = *head;
-
-	listint_t *tmp2 = *head;
-
-	int len = 0, len2;
-	int count = 1, count2 = 1;
-
-	while (tmp != NULL)
-
-	{
-		len += 1;
-		tmp = tmp->next;
-	}
-
-	tmp = *head;
-	len2 = len;
-
-	while (len / 2 >= count2)
-	{
-		while (len2 > count)
-		{
-			count++;
-			tmp2 = tmp2->next;
-		}
-
-		if (tmp->n != tmp2->n)
-			return (0);
-
-		tmp = tmp->next;
-		tmp2 = *head;
-		len2 = len - count2;
-		count2++;
-		count = 1;
-	}
-	return (1);
+	int pal = cpalindrome(head, *head);
+	return (pal);
 }
