@@ -6,10 +6,10 @@ def rain(walls):
     """ Given a list of non-negative integers
     representing walls of width 1, calculate how
     much water will be retained after it rains """
+    if not walls:
+        return 0
     max_list = max(walls)
     count = 0
-    if len(walls) == 0:
-        return 0
     for x in range(max_list):
         list_2 = valid(walls)
         for i in list_2:
