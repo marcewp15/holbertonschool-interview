@@ -13,7 +13,7 @@ def rain(walls):
         for i in list_2:
             if i <= 0:
                 count += 1
-        take_off = [elem - 1 for elem in list_2]
+        walls = [elem - 1 for elem in list_2]
     return count
 
 
@@ -21,14 +21,14 @@ def valid(walls):
     list_1 = []
     a = 0
     for y in walls:
-        if y == 0 and a == 0:
+        if y <= 0 and a == 0:
             continue
         list_1.append(y)
         a = 1
     list_2 = []
     a = 0
     for z in reversed(list_1):
-        if z == 0 and a == 0:
+        if z <= 0 and a == 0:
             continue
         list_2.append(z)
         a = 1
