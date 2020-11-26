@@ -8,6 +8,8 @@ def rain(walls):
     much water will be retained after it rains """
     max_list = max(walls)
     count = 0
+    if len(walls) == 0:
+        return 0
     for x in range(max_list):
         list_2 = valid(walls)
         for i in list_2:
